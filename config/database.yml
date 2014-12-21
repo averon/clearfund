@@ -1,0 +1,20 @@
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+development:
+  <<: *default
+  database: clearfund_development
+  host: localhost
+
+test:
+  <<: *default
+  database: clearfund_test
+
+production:
+  <<: *default
+  database: clearfund_production
+  username: clearfund
+  password: <%= ENV['CLEARFUND_DATABASE_PASSWORD'] %>
