@@ -42,7 +42,7 @@
         </form>
 
         <div ng-if="login.errors" class="alert alert-danger">
-          <h2>{{login.errors}}</h2>
+          <h2>{{login.errors.info}}</h2>
         </div>
 
       </div><!-- end Login -->
@@ -81,7 +81,7 @@
         </form>
 
         <div ng-if="signup.errors" class="alert alert-danger">
-          <h2>{{signup.errors}}</h2>
+          <h2>{{signup.errors.info}}</h2>
         </div>
 
       </div><!-- end Sign Up -->

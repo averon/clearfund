@@ -1,0 +1,25 @@
+<div class="fund-page container">
+  <div class="row">
+    <h1>
+      {{fund.name}}
+      ({{fund.symbol}})
+    </h1>
+  </div>
+
+  <table class="table table-striped">
+    <tr>
+      <th>Company</th>
+      <th>Ticker</th>
+      <th>%</th>
+    </tr>
+    <tr ng-repeat="stock in fund.stocks">
+      <td>{{stock.ticker}}</td>
+      <td>
+        <a href="/stock/{{stock.id}}">
+          {{stock.company}}
+        </a>
+      </td>
+      <td>{{stock.percentage}}</td>
+    </tr>
+  </table>
+</div>

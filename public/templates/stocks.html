@@ -1,10 +1,32 @@
-<div class="container">
-  <div class="row">
-    <div ng-repeat="stock in stocks" class="col-md-4 ccol-sm-6 col-xs-12">
-      <a href="/stock/{{stock.ticker}}">
-        {{stock.ticker}}
-      </a>
-    </div>
-  </div>
+<div class="stocks-page container">
+  <table class="table table-striped">
+    <tr>
+      <th>Ticker</th>
+      <th>Company</th>
+      <th>Price</th>
+      <th>Portfolio</th>
+    </tr>
+    <tr ng-repeat="stock in stocks">
+      <td>{{stock.ticker}}</td>
+      <td>
+        <a href="/stock/{{stock.id}}">
+          {{stock.company}}
+        </a>
+      </td>
+      <td>${{stock.price}}</td>
+      <td>
+        <a class="portfolio-stock"
+           ng-click="addPortfolioStock(stock)"
+           ng-if="!stock.inPortfolio">
+          <span class="glyphicon glyphicon-ok" style="color:green"></span> Add
+        </a>
+        <a class="portfolio-stock"
+           ng-click="removePortfolioStock(stock)"
+           ng-if="stock.inPortfolio">
+          <span class="glyphicon glyphicon-remove" style="color:red"></span> Remove
+        </a>
+      </td>
+    </tr>
+  </table>
 </div>
 

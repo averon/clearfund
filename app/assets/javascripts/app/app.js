@@ -4,19 +4,44 @@ angular.module('clearfund', [
   'ngCookies',
   'clearfund.controllers',
   'clearfund.services',
-  'clearfund.directives'
+  'clearfund.directives',
+  'clearfund.resources'
 ])
 .config(function($routeProvider, $locationProvider) {
   $routeProvider
     .when('/',
       {
+        templateUrl: '/templates/index.html'
+      })
+    .when('/stocks',
+      {
         templateUrl: '/templates/stocks.html',
         controller: 'StocksController'
       })
-    .when('/stock/:ticker',
+    .when('/stock/:id',
       {
         templateUrl: '/templates/stock.html',
         controller: 'StockController'
+      })
+    .when('/funds',
+      {
+        templateUrl: '/templates/funds.html',
+        controller: 'FundsController'
+      })
+    .when('/fund/:id',
+      {
+        templateUrl: '/templates/fund.html',
+        controller: 'FundController'
+      })
+    .when('/my/stocks',
+      {
+        templateUrl: '/templates/stocks.html',
+        controller: 'MyStocksController'
+      })
+    .when('/my/funds',
+      {
+        templateUrl: '/templates/funds.html',
+        controller: 'MyFundsController'
       })
     .when('/login',
       {

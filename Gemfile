@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 gem 'rails', '4.1.8'
 gem 'pg'
 gem 'sass-rails', '~> 4.0.3'
@@ -9,7 +8,9 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jbuilder', '~> 2.0'
 gem 'underscore-rails'
 gem 'angularjs-rails'
+gem 'angularjs-rails-resource'
 gem 'bootstrap-sass-rails'
+gem 'devise'
 
 group :development do
   gem 'spring'
