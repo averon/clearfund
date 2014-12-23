@@ -1,0 +1,19 @@
+<div class="funds-page container">
+  <table class="table table-striped">
+    <tr>
+      <th>Fund</th>
+      <th>Symbol</th>
+      <th ng-if="currentUser">Portfolio</th>
+    </tr>
+    <tr ng-repeat="fund in funds">
+      <td>
+        <a href="/fund/{{fund.id}}">
+          {{fund.name}}
+        </a>
+      </td>
+      <td>{{fund.symbol}}</td>
+      <td ng-if="currentUser" pf-fund-quickadd ng-fund="fund"></td>
+    </tr>
+  </table>
+</div>
+

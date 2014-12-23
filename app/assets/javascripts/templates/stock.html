@@ -1,0 +1,27 @@
+<div class="stock-page container">
+  <div class="row">
+    <h1>
+      {{stock.company}}
+      ({{stock.ticker}})
+      - ${{stock.price}}
+    <span pf-stock-quickadd ng-stock="stock" class="pull-right"></span>
+    </h1>
+  </div>
+
+  <table class="table table-striped">
+    <tr>
+      <th>Symbol</th>
+      <th>Name</th>
+      <th>%</th>
+    </tr>
+    <tr ng-repeat="fund in stock.funds">
+      <td>{{fund.symbol}}</td>
+      <td>
+        <a href="/fund/{{fund.id}}">
+          {{fund.name}}
+        </a>
+      </td>
+      <td>{{fund.percentage}}</td>
+    </tr>
+  </table>
+</div>

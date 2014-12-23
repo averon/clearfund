@@ -1,0 +1,22 @@
+<div class="stocks-page container">
+  <table class="table table-striped">
+    <tr>
+      <th>Ticker</th>
+      <th>Company</th>
+      <th>Price</th>
+      <th ng-if="currentUser">Portfolio</th>
+    </tr>
+    <tr ng-repeat="stock in stocks">
+      <td>{{stock.ticker}}</td>
+      <td>
+        <a href="/stock/{{stock.id}}">
+          {{stock.company}}
+        </a>
+      </td>
+      <td>${{stock.price}}</td>
+      <td ng-if="currentUser" pf-stock-quickadd ng-stock="stock">
+      </td>
+    </tr>
+  </table>
+</div>
+
