@@ -4,7 +4,7 @@
       <th>Ticker</th>
       <th>Company</th>
       <th>Price</th>
-      <th>Portfolio</th>
+      <th ng-if="currentUser">Portfolio</th>
     </tr>
     <tr ng-repeat="stock in stocks">
       <td>{{stock.ticker}}</td>
@@ -14,17 +14,7 @@
         </a>
       </td>
       <td>${{stock.price}}</td>
-      <td>
-        <a class="portfolio-stock"
-           ng-click="addPortfolioStock(stock)"
-           ng-if="!stock.inPortfolio">
-          <span class="glyphicon glyphicon-ok" style="color:green"></span> Add
-        </a>
-        <a class="portfolio-stock"
-           ng-click="removePortfolioStock(stock)"
-           ng-if="stock.inPortfolio">
-          <span class="glyphicon glyphicon-remove" style="color:red"></span> Remove
-        </a>
+      <td ng-if="currentUser" pf-stock-quickadd ng-stock="stock">
       </td>
     </tr>
   </table>

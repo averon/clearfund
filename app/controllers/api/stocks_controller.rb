@@ -2,7 +2,7 @@ class Api::StocksController < ApplicationController
   respond_to :json
 
   def index
-    @stocks = Stock.all
+    @stocks = Stock.first(10)
 
     if @stocks
       render :index

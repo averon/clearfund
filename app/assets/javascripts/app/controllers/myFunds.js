@@ -10,5 +10,6 @@ function($scope, UserService, User) {
           $scope.funds = funds;
         });
     });
+
 });
 

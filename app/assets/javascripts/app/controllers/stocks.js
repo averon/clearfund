@@ -1,17 +1,17 @@
 'use strict';
 angular.module('clearfund.controllers')
 .controller('StocksController',
-function($scope, Stock) {
-  Stock.get().then(function(stocks) {
-    $scope.stocks = stocks;
+function($scope, $q, Stock, PortfolioStock, UserService) {
+  $scope.$on('user:unset', function() {
+    $scope.currentUser = null;
   });
 
-  $scope.addPortfolioStock = function(stock) {
-    stock.inPortfolio = true;
-  }
-
-  $scope.removePortfolioStock = function(stock) {
-    stock.inPortfolio = false;
-  }
+  $q.all([
+    UserService.currentUser(),
+    Stock.get()
+  ]).then(function(values) {
+    $scope.currentUser = values[0];
+    $scope.stocks = values[1];
+  })
 });
 
