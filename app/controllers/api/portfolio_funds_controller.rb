@@ -1,6 +1,16 @@
 class Api::PortfolioFundsController < ApplicationController
   respond_to :json
 
+  def index
+    @portfolio_stocks = PortfolioStock.where(params.permit(:stock_id, :user_id))
+    render :index
+  end
+
+  def show
+    @portfolio_stock = PortfolioStock.find_by_id(params[:id])
+    render :show
+  end
+
   def create
     @portfolio_fund = PortfolioFund.new(portfolio_fund_params)
 
@@ -27,5 +37,11 @@ class Api::PortfolioFundsController < ApplicationController
           info: @portfolio_fund.errors, data: {}
         }
     end
+  end
+
+  private
+
+  def portfolio_fund_params
+    params.require(:portfolio_fund).permit(:user_id, :fund_id)
   end
 end

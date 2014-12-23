@@ -5,6 +5,5 @@ angular.module('clearfund.controllers')
     Stock.get($routeParams.id)
       .then(function(stock) {
         $scope.stock = stock;
-        console.log(stock);
       });
 });

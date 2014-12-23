@@ -1,7 +1,7 @@
 'use strict';
 angular.module('clearfund.controllers')
 .controller('StocksController',
-function($scope, $q, Stock, PortfolioStock, UserService) {
+function($scope, $q, Stock, UserService) {
   $scope.$on('user:unset', function() {
     $scope.currentUser = null;
   });

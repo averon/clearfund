@@ -3,6 +3,7 @@
     <h1>
       {{fund.name}}
       ({{fund.symbol}})
+      <span ng-if="currentUser" pf-fund-quickadd ng-fund="fund" class="pull-right"></span>
     </h1>
   </div>
 

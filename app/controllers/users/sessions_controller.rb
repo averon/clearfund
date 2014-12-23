@@ -1,6 +1,6 @@
 class Users::SessionsController < DeviseController
   skip_before_filter :verify_authenticity_token
-  before_filter :authenticate_user!, except: [:create]
+  before_filter :authenticate_user_from_token!, only: [:destroy]
   respond_to :json
 
   def create
@@ -17,6 +17,7 @@ class Users::SessionsController < DeviseController
   end
 
   def destroy
+    return permission_denied unless params[:user][:id].to_s == @current_user.id.to_s
     resource = User.find_for_database_authentication(id: params[:user][:id])
     return failure unless resource
     resource.clear_authentication_token

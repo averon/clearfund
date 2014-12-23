@@ -31,16 +31,9 @@ angular.module('clearfund.directives', [])
       $scope.$watch('ngStock', function(newValue, oldValue) {
         if (newValue) {
           UserService.currentUser().then(function(user) {
-            if (user) {
-              $scope.currentUser = user;
-              PortfolioStock.inPortfolio(user, $scope.ngStock).
-                then(function(inPortfolio) {
-                  $scope.inPortfolio = inPortfolio;
-              });
-            } else {
-              $scope.inPortfolio = false;
-            }
+            $scope.currentUser = user;
           });
+          $scope.inPortfolio = $scope.ngStock.inPortfolio;
         }
       });
 
@@ -62,4 +55,40 @@ angular.module('clearfund.directives', [])
       ngStock: '='
     }
   };
+})
+.directive('pfFundQuickadd', function(UserService, PortfolioFund) {
+  return {
+    templateUrl: '/templates/pf_fund_quickadd.html',
+    link: function($scope) {
+      $scope.$on('user:unset', function() {
+        $scope.currentUser = null;
+      });
+
+      $scope.$watch('ngFund', function(newValue, oldValue) {
+        if (newValue) {
+          UserService.currentUser().then(function(user) {
+            $scope.currentUser = user;
+          });
+          $scope.inPortfolio = $scope.ngFund.inPortfolio;
+        }
+      });
+
+      $scope.addPortfolioFund = function(fund) {
+        $scope.inPortfolio = true;
+        UserService.currentUser().then(function(user) {
+          PortfolioFund.createForUserAndFund(user, fund);
+        })
+      }
+
+      $scope.removePortfolioFund = function(fund) {
+        $scope.inPortfolio = false;
+        UserService.currentUser().then(function(user) {
+          PortfolioFund.removePortfolioFund(user, fund);
+        });
+      }
+    },
+    scope: {
+      ngFund: '='
+    }
+  }
 });

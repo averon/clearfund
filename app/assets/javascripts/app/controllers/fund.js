@@ -5,6 +5,5 @@ angular.module('clearfund.controllers')
     Fund.get($routeParams.id)
       .then(function(fund) {
         $scope.fund = fund;
-        console.log(fund);
       });
 });

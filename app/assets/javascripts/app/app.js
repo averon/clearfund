@@ -5,9 +5,22 @@ angular.module('clearfund', [
   'clearfund.controllers',
   'clearfund.services',
   'clearfund.directives',
-  'clearfund.resources'
+  'clearfund.resources',
+  'clearfund.interceptors'
 ])
 .config(function($routeProvider, $locationProvider) {
+
+  var requireCurrentUser = function($q, $route, $location, AuthService) {
+    var d = $q.defer();
+    AuthService.currentUser().then(function(user) {
+      if (user) {
+        d.resolve();
+      } else {
+        $location.path('/');
+      }
+    });
+  };
+
   $routeProvider
     .when('/',
       {
@@ -33,15 +46,28 @@ angular.module('clearfund', [
         templateUrl: '/templates/fund.html',
         controller: 'FundController'
       })
+    .when('/my/home',
+      {
+        templateUrl: '/templates/myHome.html',
+        resolve: {
+          user: requireCurrentUser
+        }
+      })
     .when('/my/stocks',
       {
         templateUrl: '/templates/stocks.html',
-        controller: 'MyStocksController'
+        controller: 'MyStocksController',
+        resolve: {
+          user: requireCurrentUser
+        }
       })
     .when('/my/funds',
       {
         templateUrl: '/templates/funds.html',
-        controller: 'MyFundsController'
+        controller: 'MyFundsController',
+        resolve: {
+          user: requireCurrentUser
+        }
       })
     .when('/login',
       {
@@ -51,5 +77,8 @@ angular.module('clearfund', [
     .otherwise({redirectTo: '/'});
   $locationProvider.html5Mode(true);
 })
+.config(function($httpProvider) {
+  $httpProvider.interceptors.push('UserAuthInterceptor');
+});
 
 

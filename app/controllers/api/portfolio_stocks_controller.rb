@@ -7,9 +7,7 @@ class Api::PortfolioStocksController < ApplicationController
   end
 
   def show
-    @portfolio_stock = 
-      PortfolioStock.where(ticker: params[:ticker]).first ||
-      PortfolioStock.where(id: params[:id]).first
+    @portfolio_stock = PortfolioStock.find_by_id(params[:id])
     render :show
   end
 

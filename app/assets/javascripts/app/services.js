@@ -1,13 +1,18 @@
 'use strict';
 angular.module('clearfund.services', [])
-.service('UserService',
-  function($rootScope, $q, $cookieStore, $http) {
+.service('AuthService',
+  function($rootScope, $q, $cookieStore) {
     var service = this;
     this._user = null;
     this.setCurrentUser = function(u) {
       service._user = u;
       $cookieStore.put('user', u);
       $rootScope.$broadcast("user:set", u);
+    };
+    this.removeCurrentUser = function() {
+      service._user = null;
+      $cookieStore.remove('user');
+      $rootScope.$broadcast("user:unset");
     };
     this.currentUser = function() {
       var d = $q.defer();
@@ -21,6 +26,32 @@ angular.module('clearfund.services', [])
       }
       return d.promise;
     };
+  })
+.service('UserService',
+  function($rootScope, $q, $cookieStore, $http, AuthService) {
+    this.currentUser = AuthService.currentUser;
+
+    var service = this;
+
+    this.signup = function(params) {
+      var d = $q.defer();
+      $http({
+        url: '/users',
+        method: 'POST',
+        data: {
+          user: params
+        }
+      }).success(function(response) {
+        var user = response.data.user;
+        user.auth_token = response.data.auth_token;
+        AuthService.setCurrentUser(user);
+        d.resolve(user);
+      }).error(function(reason) {
+        d.reject(reason);
+      });
+      return d.promise;
+    }
+
     this.login = function(params) {
       var d = $q.defer();
       $http({
@@ -34,7 +65,7 @@ angular.module('clearfund.services', [])
         if (response.success) {
           var user = response.data.user;
           user.auth_token = response.data.auth_token;
-          service.setCurrentUser(user);
+          AuthService.setCurrentUser(user);
           d.resolve(user);
         } else {
           d.reject(reponse);
@@ -47,28 +78,8 @@ angular.module('clearfund.services', [])
 
     this.logout = function() {
       var d = $q.defer();
-      service._user = null;
-      $cookieStore.remove('user');
-      $rootScope.$broadcast("user:unset");
+      AuthService.removeCurrentUser();
       d.resolve();
       return d.promise;
     };
-    this.signup = function(params) {
-      var d = $q.defer();
-      $http({
-        url: '/users',
-        method: 'POST',
-        data: {
-          user: params
-        }
-      }).success(function(response) {
-        var user = response.data.user;
-        user.auth_token = response.data.auth_token;
-        service.setCurrentUser(user);
-        d.resolve(user);
-      }).error(function(reason) {
-        d.reject(reason);
-      });
-      return d.promise;
-    }
   });
