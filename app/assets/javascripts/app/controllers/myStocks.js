@@ -2,14 +2,15 @@
 angular.module('clearfund.controllers')
 .controller('MyStocksController',
 function($scope, UserService, User) {
-  User.query({id: UserService.currentUser.id})
-    .then(function(users){
-      $scope.user = users[0];
+  UserService.currentUser().then(function(u) {
+    User.get(u.id).then(function(user) {
+      $scope.user = user;
       $scope.user.stocks()
         .then(function(stocks) {
           $scope.stocks = stocks;
         });
     });
+  });
 
   $scope.reverse = true;
 });
