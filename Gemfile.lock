@@ -73,6 +73,9 @@ GEM
     mime-types (2.4.3)
     minitest (5.5.0)
     multi_json (1.10.1)
+    ngannotate-rails (0.14.1)
+      execjs
+      rails (>= 3.1)
     orm_adapter (0.5.0)
     pg (0.17.1)
     quiet_assets (1.0.3)
@@ -148,6 +151,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   devise
   jbuilder (~> 2.0)
+  ngannotate-rails
   pg
   quiet_assets
   rails (= 4.1.8)

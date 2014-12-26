@@ -21,6 +21,7 @@ end
 
 group :production do
   gem 'rails_12factor'
+  gem 'ngannotate-rails'
 end
 
 group :doc do
