@@ -8,7 +8,7 @@ class Api::FundsController < ApplicationController
       portfolio_ids = portfolio_funds.pluck('id')
 
       unheld_funds = Fund.where.not({id: portfolio_ids})
-                        .each { |f| f.in_portfolio = false }
+                         .each { |f| f.in_portfolio = false }
 
       portfolio_funds.each { |f| f.in_portfolio = true }
 
