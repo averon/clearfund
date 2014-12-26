@@ -6,4 +6,6 @@ angular.module('clearfund.controllers')
       .then(function(fund) {
         $scope.fund = fund;
       });
+
+    $scope.reverse = true;
 });

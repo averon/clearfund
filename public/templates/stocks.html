@@ -1,12 +1,12 @@
 <div class="stocks-page container">
   <table class="table table-striped">
     <tr>
-      <th>Ticker</th>
-      <th>Company</th>
-      <th>Price</th>
+      <th><a ng-click="predicate='ticker'; reverse=!reverse">Ticker</a></th>
+      <th><a ng-click="predicate='company'; reverse=!reverse">Company</a></th>
+      <th><a ng-click="predicate='price'; reverse=!reverse">Price</a></th>
       <th ng-if="currentUser">Portfolio</th>
     </tr>
-    <tr ng-repeat="stock in stocks">
+    <tr ng-repeat="stock in stocks | orderBy:predicate:reverse">
       <td>{{stock.ticker}}</td>
       <td>
         <a href="/stock/{{stock.id}}">

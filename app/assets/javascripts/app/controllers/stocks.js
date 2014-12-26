@@ -13,5 +13,7 @@ function($scope, $q, Stock, UserService) {
     $scope.currentUser = values[0];
     $scope.stocks = values[1];
   })
+
+  $scope.reverse = true;
 });
 

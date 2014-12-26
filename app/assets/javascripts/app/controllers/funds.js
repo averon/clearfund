@@ -12,6 +12,8 @@ function($scope, $q, Fund, UserService) {
   ]).then(function(values) {
     $scope.currentUser = values[0];
     $scope.funds = values[1];
-  })
+  });
+
+  $scope.reverse = true;
 });
 

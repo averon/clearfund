@@ -10,5 +10,7 @@ function($scope, UserService, User) {
           $scope.stocks = stocks;
         });
     });
+
+  $scope.reverse = true;
 });
 

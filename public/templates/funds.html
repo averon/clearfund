@@ -1,11 +1,11 @@
 <div class="funds-page container">
   <table class="table table-striped">
     <tr>
-      <th>Fund</th>
-      <th>Symbol</th>
+      <th><a ng-click="predicate='name'; reverse=!reverse">Fund</a></th>
+      <th><a ng-click="predicate='symbol'; reverse=!reverse">Symbol</a></th>
       <th ng-if="currentUser">Portfolio</th>
     </tr>
-    <tr ng-repeat="fund in funds">
+    <tr ng-repeat="fund in funds | orderBy:predicate:reverse">
       <td>
         <a href="/fund/{{fund.id}}">
           {{fund.name}}

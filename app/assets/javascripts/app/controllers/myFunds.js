@@ -11,5 +11,6 @@ function($scope, UserService, User) {
         });
     });
 
+  $scope.reverse = true;
 });
 

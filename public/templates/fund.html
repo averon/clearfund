@@ -9,11 +9,11 @@
 
   <table class="table table-striped">
     <tr>
-      <th>Company</th>
-      <th>Ticker</th>
-      <th>%</th>
+      <th><a ng-click="predicate='company'; reverse=!reverse">Company</a></th>
+      <th><a ng-click="predicate='ticker'; reverse=!reverse">Ticker</a></th>
+      <th><a ng-click="predicate='percentage';reverse=!reverse">%</a></th>
     </tr>
-    <tr ng-repeat="stock in fund.stocks">
+    <tr ng-repeat="stock in fund.stocks | orderBy:predicate:reverse">
       <td>{{stock.ticker}}</td>
       <td>
         <a href="/stock/{{stock.id}}">
